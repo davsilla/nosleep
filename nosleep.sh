@@ -25,13 +25,13 @@ if [[ $1 == "STATUS" ]]; then
 fi
 
 if [[ $1 == "ON" ]]; then
-    echo -e "${YELLOW}SETTING SLEEP_DISABLED TO 1${NC}"
+    echo -e "${YELLOW}DISABLING SLEEP ON LID CLOSE${NC}"
     sudo pmset -a lidwake 0
     sudo pmset disablesleep 1
 fi
 
 if [[ $1 == "OFF" ]]; then
-    echo -e "${YELLOW}SETTING SLEEP_DISABLED TO 0${NC}"
+    echo -e "${YELLOW}ENABLING SLEEP ON LID CLOSE${NC}"
     sudo pmset -a lidwake 1
     sudo pmset disablesleep 0
 fi
@@ -39,9 +39,9 @@ shopt -u nocasematch
 
 SLEEP_DISABLED=$(pmset -g | grep SleepDisabled | awk '{print $2}')
 if [[ $SLEEP_DISABLED == 0 ]]; then
-    echo -e "${GREEN}ENABLED SLEEP${NC}"
+    echo -e "${GREEN}ENABLED SLEEP ON LID CLOSE${NC}"
 else
-    echo -e "${BLUE}DISABLED SLEEP${NC}"
+    echo -e "${BLUE}DISABLED SLEEP ON LID CLOSE${NC}"
     echo -e "${RED}REMEMBER TO RE-ENABLE!${NC}"
 fi
 
